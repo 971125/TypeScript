@@ -1,0 +1,57 @@
+模块化管理:
+  导出export()
+  导入import()
+模块加载器
+  Node.js的ConnonJS
+  web应用的Require.js
+  TypeScript中的模块机制，也提供了转换为amd、es6、umd、commonjs和system的功能
+  模块加载器一方面实现js文件的异步加载，避免网页失去响应。
+    另一方面负责管理模块之间的依赖关系，便于代码的编写和维护
+  模块加载器一般分为浏览器端使用的AMD规范和CMD规范、
+    服务器端使用的CommonJS规范、跨浏览器端和服务器端的UMD规范
+    AMD规范 实现库requireJS
+        AMD(Asynchronous Module Definition 异步模块加载机制)规范的描述，完整描述了
+        模块的定义、依赖关系、应用关系以及异步加载机制
+        define函数有两个参数，一个参数需要一个数组来描述依赖项
+        第二个参数是一个匿名的工厂函数，返回一个对象，其中匿名函数的参数列表和依赖项时一一对应的关系
+    CMD规范 实现库SeaJS
+      代码书写格式：
+        define(id?,d?,factory) 文件名常作为模块id
+        CMD(Common Module Definition,通用模块定义)实现库SeaJS,推崇依赖就近，一般不在define函数的参数中写依赖
+        factory是一个工厂模式：function(require,exports,module)
+          require是一个方法用来获取其他模块提供的接口
+          exports是一个对象，用来向外提供模块接口
+          module是一个对象，上面存储了与当前模块相关联的一些方法和属性
+    CommonJS规范
+      CommonJS规范规定，每一个文件就是一个模块，拥有自己独立的作用域；
+        核心思想就是通过require方法来同步加载依赖的模块，通过exports或者module.exports来导入需要暴露的接口
+        NodeJS是CommonJS规范的实现，而webpack打包工具也是原生支持CommonJS规范的
+        由于CommonJS是同步加载模块的，同步等待会出现假死的情况，因此CommonJS不适用于浏览器，但可以借助工具(Browserify)
+        进行打包，从而适用于浏览器
+    UMD规范
+      (AMD+CommonJS)整合以上两种规范的方法
+        UMD有两种原则:
+          所有定义的模块的方法需要单独传入依赖
+          所有定义模块的方法都需要返回一个对象,供其他模块使用
+        实现思路:
+          先判断当前环境是否支持commonjs模块(判断module和module.exports 是否为object类型) 如果有则使用CommonJS规范执行
+          如果不存在判断是否支持AMD(判断define和define.cmd是否存在),如果有则使用AMD规范
+          如果都不存在,则将模块暴露到全局变量window或global中
+    SystemJs规范
+      SystemJs是一个通用的模块加载器,能在浏览器或者NodeJS上动态加载模块,并且支持CommonJS、AMD、全局模块对象和ES6模块
+      SystemJs规范用System.register函数来创建模块,第一个参数为数组，可以用来表示依赖项，第二个参数是一个工厂函数，可以用来定义模块信息
+    ES6规范
+      可以直接import和export在浏览器中导入和导出模块,
+      一个js文件代表一个js模块。
+  7.5.2
+    外部模块  
+      export {}导出
+      import {} from 外部文件 导入
+      as 别名
+      * 导出所有模块  用*导入模块时必须用as重命名
+    解析模块
+      import {m} from 'moduleA'  为了检查导入的m模块是如何使用,需要检查moduleA
+      模块路径解析 "./"当前文件目录  "../"当前目录上一层目录   "/" 当前文件所在的盘符根目录
+    模块解析策略：
+      Node和Classic
+        在使用 module AMD|System|ES2015时默认Classic，其它情况时使用Node

@@ -1,0 +1,40 @@
+TypeScript 原始类型：数值型(nnumber)、布尔型(boolean)、字符型(string)、符号型(symbol)、void型、null型、undefine型
+TypeScript 数据类型除了any类型外，其他可以分为原始类型、对象类型、联合类型、交叉类型和类型参数
+数据类型又可以分为内置类型和类型参数
+TypeScript中有Number和number两种类型，但是它们是不一样的，Number是number类型的封装对象，Number对象的值是number类型的
+其中还包括Boolean和boolean  String和string  都是这种关系
+数值型定义:
+    let num : number=Number(1)
+    let num1=new Number(2)
+布尔值定义：
+    let a : boolean =true
+    let b=Boolean(1)//true
+枚举类型(enum)
+    是对JavaScript类型的补充，被限定在一定的范围内的场景
+    默认情况，枚举中的元素从0开始的编号
+    手动编号和自动编号
+任意值:(any)
+    任意值类型和Object看起来有相似的方法，但是Object类型的变量只是允许你给他赋不同类型的值
+    但却不能够在它上面条用可能存在的方法
+空值(void)、Null、Undefine
+    一、空值(void)表示不返回任何值，一般在函数返回类型上使用，表示没有返回值的函数。js中没有空值类型
+    二、null表示不存在对象值
+    三、undefine 表示变量已经声明但是尚未初始化变量的值
+    null undefine any关系:
+        let uv:null =null
+        let nv2:null=undefined
+        let uv3:null=2//报错
+        let a:any=2;
+        uv=a;
+        不能直接将number赋值给null，但可以通过number赋值给any类型，然后在赋值给any类型。
+        undefine和null是所有类型的子类型
+        Never类型是其他类型(包括null和undefined)的子类
+交叉类型(Intersection Types)
+  可以将多个类型合并为一个类型.合并后的交叉类型包含了其中所有类型的特征
+联合类型(Union Types)
+  联合类型表示取值可以为多种类型中的一种.
+交叉类型和联合类型
+  类A{方法a;方法b}和类B{方法a;方法c}
+  交叉类型:let x : A&B=<A&B>{} x可以使用A方法也可以使用B方法
+  联合类型:let x : A|B=<A|B>{} x只能使用A和B的共同方法  
+    

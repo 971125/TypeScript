@@ -1,0 +1,10 @@
+命名空间(namespace):
+  基本语法格式：
+    namespace 命名空间名{
+      // 内部类和成员
+    }
+  命名空间引入标签: ///<reference path="ts文件路径"/>
+嵌套命名空间
+  在嵌套命名空间中，里层的namespace必须用export 否则无法访问
+  给命名空间起别名
+    import s=空间名

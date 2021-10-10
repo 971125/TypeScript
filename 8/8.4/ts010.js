@@ -1,0 +1,13 @@
+"use strict";
+exports.__esModule = true;
+var ts007_1 = require("./ts007");
+var ts008_1 = require("./ts008");
+var ts009_1 = require("./ts009");
+var student = new ts007_1.NM("09060", "Jack", "高三一班");
+var teacher = new ts008_1.Teacher("T1008", "Smith");
+var geDAao = new ts009_1.GenericDAO();
+var ret = geDAao.save(student);
+console.log(ret);
+var getDao_2 = new ts009_1.GenericDAO();
+ret = getDao_2.save(teacher);
+console.log(ret);
